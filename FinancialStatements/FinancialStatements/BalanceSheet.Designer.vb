@@ -22,22 +22,20 @@ Partial Class KarisyakuForm
     'コード エディタを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ファイルFToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.名前をつけて保存ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SaveToName = New System.Windows.Forms.ToolStripMenuItem()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.SplitContainer2 = New System.Windows.Forms.SplitContainer()
         Me.label6 = New System.Windows.Forms.Label()
         Me.RyudouMoney_Sum = New System.Windows.Forms.Label()
         Me.LiquidGridView = New System.Windows.Forms.DataGridView()
-        Me.ItemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Money = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
@@ -60,7 +58,10 @@ Partial Class KarisyakuForm
         Me.TotalMoney = New System.Windows.Forms.Label()
         Me.NetAssets = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.すべてを保存ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.終了ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.ItemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Money = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -90,16 +91,17 @@ Partial Class KarisyakuForm
         '
         'ファイルFToolStripMenuItem
         '
-        Me.ファイルFToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.名前をつけて保存ToolStripMenuItem, Me.すべてを保存ToolStripMenuItem})
+        Me.ファイルFToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveToName, Me.終了ToolStripMenuItem})
         Me.ファイルFToolStripMenuItem.Name = "ファイルFToolStripMenuItem"
         Me.ファイルFToolStripMenuItem.Size = New System.Drawing.Size(92, 22)
         Me.ファイルFToolStripMenuItem.Text = "ファイル（&F)"
         '
-        '名前をつけて保存ToolStripMenuItem
+        'SaveToName
         '
-        Me.名前をつけて保存ToolStripMenuItem.Name = "名前をつけて保存ToolStripMenuItem"
-        Me.名前をつけて保存ToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
-        Me.名前をつけて保存ToolStripMenuItem.Text = "名前をつけて保存"
+        Me.SaveToName.CheckOnClick = True
+        Me.SaveToName.Name = "SaveToName"
+        Me.SaveToName.Size = New System.Drawing.Size(172, 22)
+        Me.SaveToName.Text = "名前をつけて保存"
         '
         'SplitContainer1
         '
@@ -134,6 +136,7 @@ Partial Class KarisyakuForm
         '
         'SplitContainer2.Panel1
         '
+        Me.SplitContainer2.Panel1.Controls.Add(Me.Button1)
         Me.SplitContainer2.Panel1.Controls.Add(Me.label6)
         Me.SplitContainer2.Panel1.Controls.Add(Me.RyudouMoney_Sum)
         Me.SplitContainer2.Panel1.Controls.Add(Me.LiquidGridView)
@@ -184,6 +187,7 @@ Partial Class KarisyakuForm
         '
         'LiquidGridView
         '
+        Me.LiquidGridView.AllowUserToAddRows = False
         Me.LiquidGridView.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -195,22 +199,6 @@ Partial Class KarisyakuForm
         Me.LiquidGridView.RowTemplate.Height = 21
         Me.LiquidGridView.Size = New System.Drawing.Size(346, 150)
         Me.LiquidGridView.TabIndex = 2
-        '
-        'ItemName
-        '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.ItemName.DefaultCellStyle = DataGridViewCellStyle1
-        Me.ItemName.HeaderText = "項目"
-        Me.ItemName.Name = "ItemName"
-        '
-        'Money
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle2.Format = "C2"
-        DataGridViewCellStyle2.NullValue = "\0"
-        Me.Money.DefaultCellStyle = DataGridViewCellStyle2
-        Me.Money.HeaderText = "金額"
-        Me.Money.Name = "Money"
         '
         'Label2
         '
@@ -516,11 +504,37 @@ Partial Class KarisyakuForm
         Me.Label5.Text = "純資産"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'すべてを保存ToolStripMenuItem
+        '終了ToolStripMenuItem
         '
-        Me.すべてを保存ToolStripMenuItem.Name = "すべてを保存ToolStripMenuItem"
-        Me.すべてを保存ToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
-        Me.すべてを保存ToolStripMenuItem.Text = "すべてを保存"
+        Me.終了ToolStripMenuItem.Name = "終了ToolStripMenuItem"
+        Me.終了ToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
+        Me.終了ToolStripMenuItem.Text = "終了"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(25, 26)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 5
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'ItemName
+        '
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.ItemName.DefaultCellStyle = DataGridViewCellStyle1
+        Me.ItemName.HeaderText = "項目"
+        Me.ItemName.Name = "ItemName"
+        Me.ItemName.ReadOnly = True
+        '
+        'Money
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle2.Format = "C2"
+        DataGridViewCellStyle2.NullValue = "\0"
+        Me.Money.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Money.HeaderText = "金額"
+        Me.Money.Name = "Money"
         '
         'KarisyakuForm
         '
@@ -578,14 +592,15 @@ Partial Class KarisyakuForm
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents AssetTotal As System.Windows.Forms.Label
     Friend WithEvents Label15 As System.Windows.Forms.Label
-    Friend WithEvents ItemName As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Money As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents FixedMoney As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents LiabilityMoney As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ファイルFToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents 名前をつけて保存ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents すべてを保存ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SaveToName As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents 終了ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents ItemName As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Money As System.Windows.Forms.DataGridViewTextBoxColumn
 
 End Class
